@@ -21,43 +21,48 @@ class Form extends React.Component {
       warning: false
     };
 
-    // this.handleUsername = this.handleUsername.bind(this);
-    // this.handlePassword = this.handlePassword.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
     this.switchSign = this.switchSign.bind(this);
     this.handleTouchTap = this.handleTouchTap.bind(this);
     this.switchWarning = this.switchWarning.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleChangeUsername = this.handleChangeUsername.bind(this);
+    // this.handleChangePassword = this.handleChangePassword.bind(this);
+    // this.handleChangeUsername = this.handleChangeUsername.bind(this);
   }
 
-  // handleUsername(value) {
-  //   this.setState({username: value});
-  // }
+  handleUsername(value) {
+    this.setState({username: value});
+    // alert(this.state.username);
+  }
 
-  // handlePassword(value) {
-  //   this.setState({password: value});
-  // }
+  handlePassword(value) {
+    this.setState({password: value});
+    // alert(this.state.password);
+  }
 
   switchSign(signin) {
     this.setState({isSignin: signin});
   }
   page() {
     switch(this.props.page) {
-      case '0': return <LogIn updateUsername={this.handleChangeUsername}
-                              updatePassword={this.handleChangePassword}
+      case '0': return <LogIn 
                               warning={this.state.warning}
-                              getValue={this.handlePassword}
-                              switchWarning={this.switchWarning}/>;
+                             
+                              switchWarning={this.switchWarning}
+                              waring={this.state.waring} 
+                              getUsername={this.handleUsername}
+                              getPassword={this.handlePassword}/>;
       case '1': return <Register />;
       default: return <LogIn />;
     }
   }
-  handleChangeUsername(event) {
-    this.setState({username: event.target.value});
-  }
-  handleChangePassword(event) {
-    this.setState({password: event.target.value});
-  }
+  // handleChangeUsername(event) {
+  //   this.setState({username: event.target.value});
+  //   alert(this.state.username);
+  // }
+  // handleChangePassword(event) {
+  //   this.setState({password: event.target.value});
+  // }
 
   handleTouchTap(event) {
     const username = this.state.username,

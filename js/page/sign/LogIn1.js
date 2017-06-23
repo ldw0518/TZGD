@@ -12,7 +12,7 @@ class LogIn1 extends React.Component {
       isSignin: true,
       username: '',
       password: '',
-      warning: false,
+      // warning: false,
     };
     this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -22,10 +22,12 @@ class LogIn1 extends React.Component {
   }
 	handleUsername(value) {
     this.setState({username: value});
+    // alert(this.state.username);
   }
 
   handlePassword(value) {
     this.setState({password: value});
+    // alert(this.state.password);
   }
 
   switchSign(signin) {
@@ -42,15 +44,15 @@ class LogIn1 extends React.Component {
       <div style={styles.container}>
         <RadiusInput
           placeholder="学号"
-          warning={this.state.warning}
+          warning={this.props.warning}
           switchWarning={this.switchWarning}
-          getValue={this.handleUsername}/>
+          getValue={this.props.getUsername}/>
         <RadiusInput
           placeholder="密码"
           type="password"
-          warning={this.state.warning}
+          warning={this.props.warning}
           switchWarning={this.switchWarning}
-          getValue={this.handlePassword}/>
+          getValue={this.props.getPassword}/>
   
       </div>
     );

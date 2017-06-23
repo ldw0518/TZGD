@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Header from './Header';
+import Pictures from './Pictures';
 // import AppList from './AppList';
 // import AppTabs from './AppTabs';
 // import SongCard from './SongCard';
@@ -31,7 +32,7 @@ class Index extends React.Component {
     return (
       <div>
         <Header />
-        
+        <Pictures />
       
       </div>
     );

@@ -60,7 +60,7 @@ class RadiusInput extends React.Component {
 
 const styles = {
   container: (bc) => ({
-    width: 300,
+    width: 260,
     height: 26,
     padding: 10,
     margin: 10,
