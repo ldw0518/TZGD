@@ -8,6 +8,7 @@ import { createStore } from 'redux';
 import reducers from '../reducers';
 import Home from '../components';
 import Sign from './sign';
+import Details from './details';
 
 let store = createStore(reducers);
 
@@ -19,6 +20,7 @@ class AppRouter extends React.Component {
           <div>
             <Route exact path="/" component={Home}/>
             <Route path="/sign" component={Sign}/>
+            <Route path="/details**" component={Details} />
           </div>
         </Router>
       </Provider>

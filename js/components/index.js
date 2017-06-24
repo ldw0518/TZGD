@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import Header from './Header';
 import Pictures from './Pictures';
+import Favourite from './Favourite';
 // import AppList from './AppList';
 // import AppTabs from './AppTabs';
 // import SongCard from './SongCard';
@@ -31,28 +32,31 @@ class Index extends React.Component {
   render() {
     return (
       <div>
-        <Header />
-        <Pictures />
-      
+        <div>
+          <Header />
+        </div>
+        <div style={styles.container}>
+          <Favourite style={styles.favourite}/>
+        </div>
+        
       </div>
     );
   }
 }
 
 
-// const styles = {
-//   container: {
-//     margin: '70px 0 0 0',
-//     width: '100%',
-//     display: 'flex',
-//     justifyContent: 'center',
-//   },
-// };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     page: state.page
-//   };
-// };
+const styles = {
+  container: {
+    marginTop: 45,
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "90%",
+    borderColor: "black"
+  },
+  favourite: {
+    // margin: 50,
+    // float: 'left'
+  }
+};
 
 export default Index;
