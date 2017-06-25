@@ -2,10 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {signin} from '../actions';
 
+// import AppBar from 'material-ui/AppBar';
+// import FlatButton from 'material-ui/FlatButton';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import {pink50} from 'material-ui/styles/colors';
 
 import {Link} from 'react-router-dom';
 
@@ -76,7 +79,8 @@ class Favourite extends React.Component {
   		    
   		    {id.map((goods, i) => (
   		    	
-  		      <Link to={"/details?id=" + id[i]}
+  		      <Link key={"/details?id=" + id[i]}
+  		      			to={"/details?id=" + id[i]}
   		      			target="_blank">
   		      	<GridTile
   		      	  key={goods}
@@ -95,7 +99,19 @@ class Favourite extends React.Component {
 	render() {
 		return (
 			<div style={styles.root}>
-  			<Subheader style={styles.header} inset={true}>我关注的商品</Subheader>
+  			<div style={styles.header}>
+  				
+  				<p style={styles.title}>我关注的商品</p>  					
+  			
+  				<div>
+  					<Link key="order" 
+  							to="/details"
+  							style={styles.more}>
+  					查看更多>>>
+  					</Link>
+  				</div>
+  				
+  			</div>
 				{this.gridList()}
 			</div>
 		)
@@ -113,55 +129,34 @@ const styles = {
     height: 300,
     overflowY: 'auto',
   },
+  header: {
+  	width: 300,
+  	height: 30,
+  	display: 'flex',
+  	justifyContent: 'space-between',
 
- //  title: {
- //  	color: 'red',
-	// }
+  },
+  title: {
+  	top: 0,
+  	fontSize: 16,
+  	flex:1,
+  	margin: 0,
+	  // paddingTop: 0,
+  	// marginLeft: "auto",
+  	textAlign: 'center'
+  },
+  more: {
+  	// float: "right",
+  	fontSize: 12,
+  	color: "black",
+  	height: 15,
+  
+  }
+ 
   
 };
 
-const tilesData = [
-  {
-    img: 'img/1.jpg',
-    title: 'Breakfast',
-    author: 'jill111',
-  },
-  {
-    img: 'img/2.jpg',
-    title: 'Tasty burger',
-    author: 'pashminu',
-  },
-  {
-    img: 'img/3.jpg',
-    title: 'Camera',
-    author: 'Danson67',
-  },
-  {
-    img: 'img/4.jpg',
-    title: 'Morning',
-    author: 'fancycrave1',
-  },
-  {
-    img: 'img/5.jpg',
-    title: 'Hats',
-    author: 'Hans',
-  },
-  {
-    img: 'img/6.jpg',
-    title: 'Honey',
-    author: 'fancycravel',
-  },
-  {
-    img: 'img/7.jpg',
-    title: 'Vegetables',
-    author: 'jill111',
-  },
-  {
-    img: 'img/8.jpg',
-    title: 'Water plant',
-    author: 'BkrmadtyaKarki',
-  },
-];
+
 
 const mapStateToProps = (state) => {
 	return {
