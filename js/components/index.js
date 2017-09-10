@@ -11,13 +11,7 @@ import Lunbo from './Lunbo';
 import Classification from './Classification';
 import Slider from './Slider/Slider';
 import SubHeader from './SubHeader';
-// import AppList from './AppList';
-// import AppTabs from './AppTabs';
-// import SongCard from './SongCard';
-// import DownloadList from './DownloadList';
-// import Upload from './Upload';
-// import SongSheet from './SongSheet';
-// import Player from './player';
+
 
 class Index extends React.Component {
   constructor(props) {
