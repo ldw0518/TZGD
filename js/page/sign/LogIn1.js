@@ -9,20 +9,18 @@ class LogIn1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSignin: true,
-      username: '',
+      id: '',
       password: '',
-      // warning: false,
     };
-    this.handleUsername = this.handleUsername.bind(this);
+    this.handleId = this.handleId.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.switchSign = this.switchSign.bind(this);
     // this.handleTouchTap = this.handleTouchTap.bind(this);
-    this.switchWarning = this.switchWarning.bind(this);
+    // this.switchWarning = this.switchWarning.bind(this);
   }
-	handleUsername(value) {
-    this.setState({username: value});
-    // alert(this.state.username);
+	handleId(value) {
+    this.setState({id: value});
+    // alert(this.state.Id);
   }
 
   handlePassword(value) {
@@ -33,27 +31,28 @@ class LogIn1 extends React.Component {
   switchSign(signin) {
     this.setState({isSignin: signin});
   }
-  switchWarning() {
-    this.setState({warning: false});
-  }
+  // switchWarning() {
+  //   this.setState({warning: false});
+  // }
 
   render() {
-    const state = this.state,
-          isSignin = state.isSignin;
+    const state = this.state;
     return (
       <div style={styles.container}>
         <RadiusInput
           placeholder="学号"
-          warning={this.props.warning}
           switchWarning={this.switchWarning}
-          getValue={this.props.getUsername}/>
+          getValue={this.props.getId}
+       
+          setIdCheck={this.props.setIdCheck}/>
+    
+        <span style={styles.idCheck(this.props.idCheck)}>此学号尚未注册</span>
         <RadiusInput
           placeholder="密码"
           type="password"
-          warning={this.props.warning}
-          switchWarning={this.switchWarning}
-          getValue={this.props.getPassword}/>
-  
+          getValue={this.props.getPassword}
+          setPasswordCheck={this.props.setPasswordCheck}/>
+        <span style={styles.passwordCheck(this.props.passwordCheck)}>密码输入错误</span>
       </div>
     );
 
@@ -62,22 +61,35 @@ class LogIn1 extends React.Component {
 
 const styles = {
   container: {
+
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  submit: {
-    width: 320,
-    height: 46,
-    borderRadius: 32,
-  },
+  // submit: {
+  //   width: 320,
+  //   height: 46,
+  //   borderRadius: 32,
+  // },
+  // id: {
+  //   display: 'inline'
+  // }
+  idCheck: (idCheck) => ({
+    display: idCheck,
+    color: 'red'
+
+  }),
+  passwordCheck: (passwordCheck) => ({
+    display: passwordCheck,
+    color: 'red'
+  })
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUsername: (username) => {
-      dispatch(signin(username));
+    setId: (id) => {
+      dispatch(signin(id));
     }
   };
 };

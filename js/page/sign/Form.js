@@ -16,23 +16,32 @@ class Form extends React.Component {
     super(props);
     this.state = {
       isSignin: true,
-      username: '',
+      id: '',
       password: '',
-      warning: false
+      ensurePassword: '',
+      username: '',
+      tel: '',
+      qq: '',
+
+      idCheck: 'none',
+      passwordCheck: 'none',
+
     };
 
-    this.handleUsername = this.handleUsername.bind(this);
+    this.handleId = this.handleId.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.switchSign = this.switchSign.bind(this);
     this.handleTouchTap = this.handleTouchTap.bind(this);
-    this.switchWarning = this.switchWarning.bind(this);
-    // this.handleChangePassword = this.handleChangePassword.bind(this);
-    // this.handleChangeUsername = this.handleChangeUsername.bind(this);
+    this.setIdCheck = this.setIdCheck.bind(this);
+    this.setPasswordCheck = this.setPasswordCheck.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
+    this.handleTel = this.handleTel.bind(this);
+    this.handleQQ = this.handleQQ.bind(this);
   }
 
-  handleUsername(value) {
-    this.setState({username: value});
-    // alert(this.state.username);
+  handleId(value) {
+    this.setState({id: value});
+    // alert(this.state.Id);
   }
 
   handlePassword(value) {
@@ -40,55 +49,104 @@ class Form extends React.Component {
     // alert(this.state.password);
   }
 
+  handleUsername(value) {
+  	this.setState({username: value});
+  }
+
+  handleTel(value) {
+  	this.setState({tel: value});
+  }
+
+  handleQQ(value) {
+  	this.setState({qq: value});
+  }
+
+
   switchSign(signin) {
     this.setState({isSignin: signin});
+    // alert("111");
   }
   page() {
     switch(this.props.page) {
-      case '0': return <LogIn 
-                              warning={this.state.warning}
-                             
-                              switchWarning={this.switchWarning}
-                              waring={this.state.waring} 
-                              getUsername={this.handleUsername}
-                              getPassword={this.handlePassword}/>;
-      case '1': return <Register />;
+      case '0': return <LogIn getId={this.handleId}
+                              getPassword={this.handlePassword}
+                              idCheck={this.state.idCheck}
+                              passwordCheck={this.state.passwordCheck} 
+
+                              setIdCheck={this.setIdCheck}
+                              setPasswordCheck={this.setPasswordCheck}/>;
+      case '1': return <Register getId={this.handleId}
+      													 getPassword={this.handlePassword}
+      													 getUsername={this.handleUsername}
+      													 getTel={this.handleTel}
+      													 getQQ={this.handleQQ}
+      													 />;
       default: return <LogIn />;
     }
   }
-  // handleChangeUsername(event) {
-  //   this.setState({username: event.target.value});
-  //   alert(this.state.username);
-  // }
-  // handleChangePassword(event) {
-  //   this.setState({password: event.target.value});
-  // }
 
   handleTouchTap(event) {
-    const username = this.state.username,
+    const id = this.state.id,
           password = this.state.password,
+          username = this.state.username,
+          tel = this.state.tel,
+          qq = this.state.qq,
           isSignin = this.state.isSignin;
-
-    fetch("/Asign", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: `username=${username}&password=${password}&isSignin=${isSignin}`
-    }).then((res) => {
-      if (res.ok) {
-        this.props.setUsername(username);
-        window.history.back(-1);
-      } else if (res.status == 401) {
-        this.setState({warning: true});
-      }
-    }, (e) => {
-      console.log("连接失败！");
-    });
+    if(isSignin) {
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `id=${id}&pwd=${password}`
+      }).then((res) => {
+        if (res.ok) {
+          this.props.setId(id);
+          window.history.back(-1);
+        } else if (res.status == 400) {
+          this.setState({
+            idCheck: 'inline',
+          });
+        } else if (res.status == 403) {
+          this.setState({
+            passwordCheck: 'inline',
+          })
+        }
+      }, (e) => {
+        console.log("连接失败！");
+      });
+    } else {
+    	if(this.props.error != 'none') {
+    		alert('请正确填写信息！');
+    	} else if(this.props.empty != 'none') {
+    		alert('请填写全部信息！');
+    	} else {
+      	fetch("/signup", {
+      	  method: "POST",
+      	  headers: {
+      	    "Content-Type": "application/x-www-form-urlencoded"
+      	  },
+      	  body: `id=${id}&pwd=${password}&name=${username}&link=手机号:${tel};QQ:${qq}`
+      	}).then((res) => {
+      	  if (res.ok) {
+      	    location.reload();
+      	  } 
+      	}, (e) => {
+      	  console.log("连接失败！");
+      	});
+    	}
+  	}
   }
 
-  switchWarning() {
-    this.setState({warning: false});
+  setIdCheck() {
+    this.setState({
+      idCheck: 'none',
+    })
+  }
+  setPasswordCheck() {
+    this.setState({
+      passwordCheck: 'none',
+    })
   }
 
   render() {
@@ -97,7 +155,7 @@ class Form extends React.Component {
     return (
       <div style={styles.main}>
         <div style={styles.Logo}>
-          <img src="./img/logo1.jpg" alt="logo" style={styles.logo}/>
+           
         </div>
       <div style={styles.container}>
         
@@ -155,14 +213,16 @@ const styles = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUsername: (username) => {
-      dispatch(signin(username));
+    setId: (id) => {
+      dispatch(signin(id));
     }
   };
 };
 const mapStateToProps = (state) => {
   return {
-    page: state.page
+    page: state.page,
+    error: state.error,
+    empty: state.empty
   };
 };
 

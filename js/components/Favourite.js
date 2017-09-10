@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {signin} from '../actions';
+// import {signin} from '../actions';
 
 // import AppBar from 'material-ui/AppBar';
 // import FlatButton from 'material-ui/FlatButton';
@@ -23,7 +23,7 @@ class Favourite extends React.Component {
 		}
 	}
 	componentWillMount() {
-		fetch("/favourite.json", {method: "GET"}).then(
+		fetch(`/favourite?id=${this.props.username}`, {method: "GET"}).then(
 			res => (res.ok) ? res.json() : undefined,
 			e => console.log("连接失败", e)
 		).then(json => {
@@ -73,7 +73,7 @@ class Favourite extends React.Component {
 		} else {
 			return(
 				<GridList
-  		    cellHeight={150}
+  		    cellHeight={170}
   		    style={styles.gridList}
   		  >
   		    
@@ -125,16 +125,16 @@ const styles = {
     width:320
   },
   gridList: {
-    width: 300,
-    height: 300,
+    width: 350,
+    height: 350,
     overflowY: 'auto',
   },
   header: {
-  	width: 300,
+  	width: 350,
   	height: 30,
   	display: 'flex',
   	justifyContent: 'space-between',
-
+    backgroundColor: pink50
   },
   title: {
   	top: 0,
@@ -160,7 +160,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
 	return {
-		username: state.username
+		username: state.id
 	};
 };
 

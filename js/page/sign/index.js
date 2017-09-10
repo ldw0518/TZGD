@@ -7,17 +7,13 @@ class Sign extends React.Component {
 		return (
 			<div style={styles.container}>
 				<div>
-					<video style={styles.background} autoPlay loop poster="polina.jpg">
+					<video style={styles.background} autoPlay loop >
 						<source src="./img/background5.mp4" type="video/mp4" />
 					</video>
 					
 				</div>
-				<div style={styles.form}>
-					
-						
-					<Form />
-		
-					
+				<div style={styles.form}>						
+					<Form />					
 				</div>
 			</div>
 			) 
@@ -60,8 +56,8 @@ const styles = {
 		width: '100%', 
   	height: '100%',
   	backgroundColor: '#000',
-  	opacity: 0.6,
-  	// background: 'hsla(0, 0%, 100%, 0.3)'
+  	// opacity: 0.6,
+  	background: 'hsla(0, 0%, 100%, 0.3)',
   	justifyContent: 'center',
   	alignItems: 'center',
 	}

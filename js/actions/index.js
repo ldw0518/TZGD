@@ -1,7 +1,7 @@
-const signin = (username) => {
+const signin = (id) => {
 	return {
 		type: 'SIGNIN',
-		username
+		id
 	};
 };
 
@@ -12,7 +12,18 @@ const setPage = (page) => {
 	};
 };
 
-
+const error = (e) => {
+	return {
+		type: 'ERROR',
+		e
+	};
+};
+const empty = (e) => {
+	return {
+		type: 'EMPTY',
+		e
+	};
+};
 
 
 
@@ -26,4 +37,6 @@ const setPage = (page) => {
 export {
 	signin,
 	setPage,
+	error,
+	empty,
 };

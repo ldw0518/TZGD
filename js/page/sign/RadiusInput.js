@@ -29,16 +29,34 @@ class RadiusInput extends React.Component {
       this.Input.focus();
     }
     this.setState({color: teal300});
-    this.props.switchWarning();
   }
 
   handleChange(event) {
     this.setState({value: event.target.value});
+    this.props.getState(event.target.value);
   }
 
   handleBlur() {
     this.setState({color: 'white'});
     this.props.getValue(this.state.value);
+    if(this.props.idCheck) {
+      this.props.idCheck();
+    }
+    if(this.props.usernameCheck) {
+      this.props.usernameCheck();
+    }
+    if(this.props.passwordCheck) {
+      this.props.passwordCheck();
+    }
+    if(this.props.ensurePwdCheck) {
+      this.props.ensurePwdCheck();
+    }
+    if(this.props.telCheck) {
+      this.props.telCheck();
+    }
+    if(this.props.linkCheck) {
+      this.props.linkCheck();
+    }
   }
 
   render() {
@@ -52,7 +70,12 @@ class RadiusInput extends React.Component {
           ref={(ref) => this.Input = ref}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
-          style={styles.input}/>
+          style={styles.input}
+          onFocus={this.props.setIdCheck || 
+                   this.props.setPasswordCheck ||
+                   this.props.setUsernameCheck ||
+                   this.props.setPwdCheck ||
+                   this.props.setLinkCheck } />
       </div>
     );
   }

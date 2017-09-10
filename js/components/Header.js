@@ -31,7 +31,7 @@ class Header extends React.Component {
 					target="_blank"
 					labelPosition="before"
 					label="登录"
-					labelStyle={styles.username}
+					labelStyle={styles.id}
 					icon={dropDown}
 				/>
 			</Link>
@@ -43,8 +43,8 @@ class Header extends React.Component {
 			<FlatButton
         target="_blank"
         labelPosition="before"
-        label={this.props.username}
-        labelStyle={styles.username}
+        label={this.props.id}
+        labelStyle={styles.id}
         icon={dropDown}
         onTouchTap={this.handleInfoButton}
        />
@@ -62,7 +62,7 @@ class Header extends React.Component {
 
   render() {
   	const iconButton = <IconButton></IconButton>,
-  				info = (this.props.username === '登录')
+  				info = (this.props.id === '登录')
   				? this.signButton() : this.infoButton();
   	return (
 			<div style={styles.container}>
@@ -70,7 +70,7 @@ class Header extends React.Component {
 					<div>
 						<ShopNote style={styles.album} color="red" hoverColor={grey900} />
 					</div>
-					<h2 style={styles.p}>淘在工大</h2>
+					<h2 style={styles.p}>乐活工大</h2>
 				</div>
 				<div style={styles.side}>
           <Avatar size={32}>L</Avatar>
@@ -129,7 +129,7 @@ const styles = {
     textAlign: 'center',
     fontFamily: 'Cursive'
   },
-  username: {
+  id: {
     color: grey900,
   }
 };
@@ -137,14 +137,14 @@ const styles = {
 
 const mapStateToProps = (state) => {
 	return {
-		username: state.username
+		id: state.id
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		quit: (username) => {
-			dispatch(signin(username));
+		quit: (id) => {
+			dispatch(signin(id));
 		}
 	};
 };
