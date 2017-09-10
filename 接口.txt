@@ -1,0 +1,20 @@
+/order?id=$id(学号）
+商品ID       属性名：id
+商品名称     属性名：name
+订单状态     属性名：status
+下单日期     属性名：date
+
+
+
+/favourite?id=$id（学号）
+商品ID       属性名：favouriteId
+商品名称     属性名：favouriteName
+图片路径     属性名：favouriteImages
+
+
+/recommend?id=id（学号）
+{
+	"推荐分类头":["推荐分类头图片","推荐分类头图片"],
+	"推荐分类1": [{"img": "商品图片","name": "商品名称","prise": "商品价格"},
+				  {"img": "商品图片","name": "商品名称","prise": "商品价格"}]
+					
