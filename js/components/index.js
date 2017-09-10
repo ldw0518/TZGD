@@ -24,18 +24,6 @@ class Index extends React.Component {
     super(props);
   }
 
-  // page() {
-  //   switch(this.props.page) {
-  //   case '0': return <AppTabs />;
-  //   case '1': return <SongCard key="songcard1" type="random"/>;
-  //   case '2': return <SongCard key="songcard2"/>;
-  //   case '3': return <Upload />;
-  //   case '4': return <DownloadList />;
-  //   case '5': return <SongSheet type="mine"/>;
-  //   default: return <SongSheet />;
-  //   }
-  // }
-
   render() {
     return (
       <div>
