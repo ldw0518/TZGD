@@ -54,5 +54,4 @@ const mapDispatchToProps = (dispatch) => {
     }
   };
 };
-// module.exports = Link;
 export default connect(null, mapDispatchToProps)(Link);

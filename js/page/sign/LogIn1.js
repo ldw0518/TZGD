@@ -15,25 +15,19 @@ class LogIn1 extends React.Component {
     this.handleId = this.handleId.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.switchSign = this.switchSign.bind(this);
-    // this.handleTouchTap = this.handleTouchTap.bind(this);
-    // this.switchWarning = this.switchWarning.bind(this);
+
   }
 	handleId(value) {
     this.setState({id: value});
-    // alert(this.state.Id);
   }
 
   handlePassword(value) {
     this.setState({password: value});
-    // alert(this.state.password);
   }
 
   switchSign(signin) {
     this.setState({isSignin: signin});
   }
-  // switchWarning() {
-  //   this.setState({warning: false});
-  // }
 
   render() {
     const state = this.state;
@@ -67,14 +61,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  // submit: {
-  //   width: 320,
-  //   height: 46,
-  //   borderRadius: 32,
-  // },
-  // id: {
-  //   display: 'inline'
-  // }
+
   idCheck: (idCheck) => ({
     display: idCheck,
     color: 'red'

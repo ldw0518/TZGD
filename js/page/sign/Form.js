@@ -95,6 +95,7 @@ class Form extends React.Component {
     if(isSignin) {
       fetch("/login", {
         method: "POST",
+        credentials: "same-origin",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
@@ -102,7 +103,15 @@ class Form extends React.Component {
       }).then((res) => {
         if (res.ok) {
           this.props.setId(id);
-          window.history.back(-1);
+          function setCookie(c_name,value,expiredays)
+          {
+          var exdate=new Date()
+          exdate.setDate(exdate.getDate()+expiredays)
+          document.cookie=c_name+ "=" +escape(value)+
+          ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+          }
+          setCookie("userId", id);
+          window.history.go(-1);
         } else if (res.status == 400) {
           this.setState({
             idCheck: 'inline',

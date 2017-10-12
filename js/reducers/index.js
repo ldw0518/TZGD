@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const id = (state='111', action) => {
+const id = (state='登录', action) => {
 	switch(action.type) {
 		case 'SIGNIN' :
 			return action.id;

@@ -150,6 +150,7 @@ class Register extends React.Component {
 				});
 			fetch("/namecheck", {
 				method: "POST",
+        credentials: "same-origin",
       		headers: {
       		  "Content-Type": "application/x-www-form-urlencoded"
       		},

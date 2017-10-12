@@ -22,6 +22,7 @@ class Header extends React.Component {
 		this.handleInfoButton = this.handleInfoButton.bind(this);
 		this.handleOnRequestChange = this.handleOnRequestChange.bind(this);
 		this.handleQuit = this.handleQuit.bind(this);
+    this.handleInformation = this.handleInformation.bind(this);
 	}
 	signButton() {
 		const dropDown = <Icon_DropDown color="black" />;
@@ -37,6 +38,31 @@ class Header extends React.Component {
 			</Link>
 		);
 	}
+  componentWillMount() {
+    var that = this.props;
+    function getCookie(c_name)
+{
+if (document.cookie.length>0)
+  {
+    var id;
+  var c_start=document.cookie.indexOf(c_name + "=")
+  if (c_start!=-1)
+    { 
+    c_start=c_start + c_name.length+1 
+    var c_end=document.cookie.indexOf(";",c_start)
+    if (c_end==-1) c_end=document.cookie.length
+      id = unescape(document.cookie.substring(c_start,c_end));
+    that.quit(id);
+    }
+    
+    return 0;
+  }
+    return ""
+}
+
+    getCookie("userId");
+    // this.props.quit(id);
+}
 	infoButton() {
 		const dropDown = <Icon_DropDown color="gray"/>;
 		return (
@@ -57,7 +83,16 @@ class Header extends React.Component {
     this.setState({openMenu: value});
   }
   handleQuit() {
-  	this.props.quit('登录');
+  	
+    fetch(
+      `/logout`,
+      {method: "GET", credentials: "same-origin"}
+    );
+
+    this.props.quit('登录');
+  }
+  handleInformation() {
+
   }
 
   render() {
@@ -79,7 +114,10 @@ class Header extends React.Component {
             iconButtonElement={iconButton}
             open={this.state.openMenu}
             onRequestChange={this.handleOnRequestChange}>
-            <MenuItem value="1" primaryText="其他" />
+            <MenuItem 
+              value="1" 
+              onTouchTap={this.handleInformation}
+              primaryText="个人中心" />
             <MenuItem
               value="quit"
               onTouchTap={this.handleQuit}

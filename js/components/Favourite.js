@@ -101,7 +101,7 @@ class Favourite extends React.Component {
 			<div style={styles.root}>
   			<div style={styles.header}>
   				
-  				<p style={styles.title}>我关注的商品</p>  					
+  				<p style={styles.title}>我的购物车</p>  					
   			
   				<div>
   					<Link key="order" 

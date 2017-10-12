@@ -13,7 +13,7 @@ class Classification extends React.Component {
 		this.state = {
 			
 			header: [{ img: "./images/header_1.jpg"}, { img: "./images/header_2.jpg"}, { img: "./images/header_3.jpg"}, { img: "./images/header_4.jpg"}, { img: "./images/header_5.jpg"}],
-			book: [{ img: "./images/2_1.jpg", name: "高数辅导书", price: "60.00" }, { img: "./images/10_1.jpg", name: "平凡的世界", price: "80.00" }, { img: "./images/19_1.jpg", name: "Java编程思想", price: "60.00" }, { img: "./images/20_1.jpg", name: "C++Primer", price: "40.00" }, { img: "./images/21_1.jpg", name: "东野圭吾文集", price: "130.00" }],
+			book: [{ img: "./images/2_1.jpg", name: "高数辅导书", price: "60.00", goodsId: "111"}, { img: "./images/10_1.jpg", name: "平凡的世界", price: "80.00" }, { img: "./images/19_1.jpg", name: "Java编程思想", price: "60.00" }, { img: "./images/20_1.jpg", name: "C++Primer", price: "40.00" }, { img: "./images/21_1.jpg", name: "东野圭吾文集", price: "130.00" }],
   		sport: [{ img: "./images/3_1.jpg", name: "耐克运动鞋", price: "400.00" }, { img: "./images/4_1.jpg", name: "羽毛球拍", price: "60.00" }, { img: "./images/11_1.jpg", name: "斯伯丁篮球", price: "300.00" }, { img: "./images/12_1.jpg", name: "哑铃", price: "100.00" }, { img: "./images/13_1.jpg", name: "滑板", price: "120.00" }],
 			clothes: [{ img: "./images/7_1.jpg", name: "男士外套", price: "180.00" }, { img: "./images/14_1.jpg", name: "男款长裤", price: "40.00" }, { img: "./images/15_1.jpg", name: "鸭舌帽", price: "40.00" }, { img: "./images/16_1.jpg", name: "连衣裙", price: "60.00" }, { img: "./images/27_1.jpg", name: "男夹克风衣", price: "70.00" }],
 			digital: [{ img: "./images/1_1.jpg", name: "机械键盘", price: "230.00" }, { img: "./images/9_1.jpg", name: "数码相机", price: "600.00" }, { img: "./images/22_1.jpg", name: "游戏手柄", price: "30.00" }, { img: "./images/23_1.jpg", name: "ViVo6", price: "1100.00" }, { img: "./images/24_1.jpg", name: "小米音响", price: "110.00" }], 
@@ -24,9 +24,9 @@ class Classification extends React.Component {
 	componentWillMount() {
 		fetch(
 			`/recommend?id=${this.props.username}`,
-			{method: "GET"}
+			{method: "GET", credentials: "same-origin"}
 		).then(
-			res => (res.ok)? res.json() : underfined,
+			res => (res.ok)? res.json() : undefined,
 			e => console.log('连接失败', e)
 		).then(json => {
 			if(json) {
@@ -55,18 +55,25 @@ class Classification extends React.Component {
 		return data.map(a => {
 			return (
 				<div style={styles.tile}>
-				<GridTile
-          key={a.img}
+				<a href="#" id={a.goodsId} ><GridTile
+          key={a.img.split(";")[0]}
+          id={a.goodsId}
           title={a.name}
           titleStyle={styles.title}
           subtitle={<span>￥:{a.price}</span>}
         	subtitleStyle={styles.subtitle}
+        	onClick={this.click.bind(this)}
         >
-        	<div><img src={a.img} style={styles.picture}/></div>
-        </GridTile>
+        	<div><img src={a.img.split(";")[0]} style={styles.picture}/></div>
+        </GridTile></a>
         </div>
       )
 		});
+	}
+
+	click(event) {
+		window.location.href="details.html?id="+this.props.username+"&goodsId="+event.currentTarget.id;
+		
 	}
 
 	recommend() {
